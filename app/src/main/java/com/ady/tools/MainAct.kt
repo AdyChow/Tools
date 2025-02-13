@@ -59,6 +59,7 @@ class MainAct : AppCompatActivity() {
             binding.title.paint.shader = linearGradient
             binding.title.invalidate()
         }
+        // ps: 如果想实现从上往下的渐变，只需将LinearGradient的第三、四个参数改为：0f, binding.title.textSize
     }
 
     private fun showColorfulText2() {
