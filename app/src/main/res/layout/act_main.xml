@@ -14,6 +14,7 @@
         android:background="@color/white"
         android:textSize="17sp"
         android:gravity="center"
+        android:text="五彩斑斓的黑"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="500:275"
         app:layout_constraintTop_toTopOf="parent" />
