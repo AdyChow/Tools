@@ -37,11 +37,12 @@ class MainAct : AppCompatActivity() {
         setContentView(binding.root)
         binding.title.typeface = assets.fontMontserratMedium
 
-        showColorfulText1()
+//        showColorfulText1()
 //        showColorfulText2()
 //        showColorfulText3()
 
-        coverName = "showColorfulText1"
+        coverName = "view 存图到相册"
+        binding.title.text = coverName
         makeCover()
     }
 
@@ -101,8 +102,8 @@ class MainAct : AppCompatActivity() {
                     this,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
+            ) { // 判断权限
+                ActivityCompat.requestPermissions( // 申请权限
                     this,
                     arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     0x123
@@ -120,13 +121,13 @@ class MainAct : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 0x123) {
+        if (requestCode == 0x123) { // 申请到了权限
             savePic()
         }
     }
 
 
-    private fun savePic() {
+    private fun savePic() { // 保存图片
         val view = binding.title
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
@@ -138,36 +139,28 @@ class MainAct : AppCompatActivity() {
         if (!file.exists()) {
             file.mkdirs()
         }
-        saveImageToGallery(this, bitmap, coverName ?: ("ady_" + UUID.randomUUID().toString()))
-
-
-        val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        mediaScanIntent.data = Uri.fromFile(file)
-        sendBroadcast(mediaScanIntent)
-
-        Toast.makeText(this, "保存成功，请到系统相册中查看", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun saveImageToGallery(context: Context, bitmap: Bitmap, displayName: String?): Uri? {
+        val displayName = coverName ?: ("ady_" + UUID.randomUUID().toString())
         val values = ContentValues()
         values.put(MediaStore.Images.Media.DISPLAY_NAME, displayName)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
         values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Tools")
-        val uri =
-            context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         if (uri != null) {
-            try {
-                context.contentResolver.openOutputStream(uri).use { outputStream ->
+            kotlin.runCatching {
+                contentResolver.openOutputStream(uri).use { outputStream ->
                     bitmap.compress(
                         Bitmap.CompressFormat.JPEG, 100,
                         outputStream!!
                     )
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
+                Toast.makeText(
+                    this, "保存成功，" +
+                        "请到系统相册中查看 $displayName", Toast.LENGTH_SHORT
+                ).show()
+            }.onFailure {
+                it.printStackTrace()
             }
         }
-        return uri
     }
 
 }
