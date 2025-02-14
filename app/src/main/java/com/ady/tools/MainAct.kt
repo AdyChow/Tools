@@ -19,7 +19,7 @@ class MainAct : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.makeCover.text = "生成封面"
+        binding.makeCover.text = "view 存图到相册"
         binding.colorTxt.text = "彩色渐变字"
     }
 

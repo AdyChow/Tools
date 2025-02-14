@@ -16,5 +16,6 @@
 
     <style name="MainButton">
         <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 </resources>
