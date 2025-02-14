@@ -1,4 +1,4 @@
-package com.ady.tools
+package com.ady.tools.kit
 
 import android.graphics.LinearGradient
 import android.graphics.Shader

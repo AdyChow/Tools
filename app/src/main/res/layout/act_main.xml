@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
+    <Button
+        android:id="@+id/make_cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/MainButton" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textColor="@color/black"
-        android:background="@color/white"
-        android:textSize="17sp"
-        android:gravity="center"
-        android:text="五彩斑斓的黑"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="500:275"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/color_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/MainButton" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
