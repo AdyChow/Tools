@@ -50,7 +50,6 @@ class ScanCodeAct : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
@@ -65,9 +64,9 @@ class ScanCodeAct : AppCompatActivity() {
         }
     }
 
-    private fun handleScannedUrl(result: String?) { // 在系统默认浏览器中打开扫描结果
+    private fun handleScannedUrl(result: String?) {
         binding.scanResult.text = result
-        kotlin.runCatching {
+        kotlin.runCatching { // 在系统默认浏览器中打开扫描结果
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(result))
             startActivity(intent)
         }.onFailure {

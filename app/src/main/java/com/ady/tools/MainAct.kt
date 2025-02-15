@@ -24,7 +24,7 @@ class MainAct : AppCompatActivity() {
     private fun initView() {
         binding.makeCover.text = "view 存图到相册"
         binding.colorTxt.text = "彩色渐变字"
-        binding.scanCode.text = "扫描二维码下载"
+        binding.scanCode.text = "扫描二维码"
     }
 
     private fun initEvents() {
