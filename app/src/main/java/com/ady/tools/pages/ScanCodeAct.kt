@@ -18,9 +18,11 @@ class ScanCodeAct : AppCompatActivity() {
         binding = ActScanCodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initScan()
+        initInternalScan()
     }
 
     private fun initScan() { // 启动扫描
+        // scanView 是在 layout xml 中声明的 zxing 库中定义的 DecoratedBarcodeView
         binding.scanView.decodeContinuous { result ->
             handleScannedUrl(result.text)
         }
@@ -49,21 +51,21 @@ class ScanCodeAct : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 binding.scanResult.text = ""
-            } else {
-                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show();
+            } else { // 扫描成功
+                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 handleScannedUrl(result.contents)
             }
         } else {
-            super.onActivityResult(requestCode, resultCode, data);
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
-    private fun handleScannedUrl(result: String?) {
+    private fun handleScannedUrl(result: String?) { // 在系统默认浏览器中打开扫描结果
         binding.scanResult.text = result
         kotlin.runCatching {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(result))
