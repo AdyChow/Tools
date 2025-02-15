@@ -1,4 +1,4 @@
-package com.ady.tools
+package com.ady.tools.pages
 
 import android.graphics.Color
 import android.graphics.LinearGradient
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import androidx.appcompat.app.AppCompatActivity
+import com.ady.tools.R
 import com.ady.tools.databinding.ActColorTxtBinding
 import com.ady.tools.kit.ForegroundSpan
 import com.ady.tools.kit.fontMontserratMedium

@@ -1,4 +1,4 @@
-package com.ady.tools
+package com.ady.tools.pages
 
 import android.content.ContentValues
 import android.content.pm.PackageManager
@@ -18,14 +18,13 @@ import java.util.UUID
 
 class CoverAct: AppCompatActivity() {
     private lateinit var binding: ActCoverBinding
-    private var coverName: String? = null
+    private var coverName: String? = "扫描二维码下载"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActCoverBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.title.typeface = assets.fontMontserratMedium
-        coverName = "view 存图到相册"
         binding.title.text = coverName
         makeCover()
     }

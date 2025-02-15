@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ady.tools.databinding.ActMainBinding
+import com.ady.tools.pages.ColorTxtAct
+import com.ady.tools.pages.CoverAct
+import com.ady.tools.pages.ScanCodeAct
 
 
 class MainAct : AppCompatActivity() {
@@ -21,6 +24,7 @@ class MainAct : AppCompatActivity() {
     private fun initView() {
         binding.makeCover.text = "view 存图到相册"
         binding.colorTxt.text = "彩色渐变字"
+        binding.scanCode.text = "扫描二维码下载"
     }
 
     private fun initEvents() {
@@ -29,6 +33,9 @@ class MainAct : AppCompatActivity() {
         }
         binding.colorTxt.setOnClickListener {
             startActivity(Intent(this, ColorTxtAct::class.java))
+        }
+        binding.scanCode.setOnClickListener {
+            startActivity(Intent(this, ScanCodeAct::class.java))
         }
     }
 }
