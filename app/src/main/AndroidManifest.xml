@@ -11,7 +11,9 @@
 
     <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -35,7 +37,9 @@
         </activity>
         <activity android:name=".pages.ColorTxtAct" />
         <activity android:name=".pages.CoverAct" />
-        <activity android:name=".pages.ScanCodeAct"/>
+        <activity android:name=".pages.ScanCodeAct" />
+        <activity android:name=".pages.SmallPicAct" />
+        <activity android:name=".pages.BigPicAct" />
     </application>
 
 </manifest>

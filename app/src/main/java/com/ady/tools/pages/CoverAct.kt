@@ -18,7 +18,7 @@ import java.util.UUID
 
 class CoverAct: AppCompatActivity() {
     private lateinit var binding: ActCoverBinding
-    private var coverName: String? = "扫描二维码"
+    private var coverName: String? = "查看大图过渡动效"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
