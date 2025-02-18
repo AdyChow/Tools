@@ -16,6 +16,7 @@
         android:required="true" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -40,6 +41,7 @@
         <activity android:name=".pages.ScanCodeAct" />
         <activity android:name=".pages.SmallPicAct" />
         <activity android:name=".pages.BigPicAct" />
+        <activity android:name=".pages.MultiLangAct" />
     </application>
 
 </manifest>
