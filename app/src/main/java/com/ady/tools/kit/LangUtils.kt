@@ -13,6 +13,7 @@ object LangUtils {
 
     private val supportLanguage = arrayListOf("zh", "en")
 
+    /** 根据当前语言获取对应的字符串内容 */
     fun getString(@StringRes defResId: Int): String? {
         var value: String? = ""
         if (defResId == 0) {
@@ -22,9 +23,9 @@ object LangUtils {
             val locales: LocaleList = App.context.resources.configuration.locales
             val locale = if (locales.isEmpty) Locale.ENGLISH else locales[0]
             val local: String = SpUtil.getString(CURRENT_LANG, "")
-            value = if (local == locale.language) {
+            value = if (local == locale.language) { // 如果当前语言未发生改变
                 App.context.resources.getString(defResId)
-            } else {
+            } else { // 如果当前语言发生了改变
                 attachBaseContext(App.context, local).resources.getString(defResId)
             }
         }.onFailure {

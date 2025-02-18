@@ -23,7 +23,7 @@ class MultiLangAct : AppCompatActivity() {
     }
 
     private fun switchLang(language: String) {
-        LangUtils.switchLanguage(language)
+        LangUtils.switchLanguage(language) // 记录当前语言发生了改变
         finish()
     }
 

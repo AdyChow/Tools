@@ -13,11 +13,11 @@ class App : Application() {
 
     override fun attachBaseContext(base: Context) {
         context = base
-        super.attachBaseContext(LangUtils.attachBaseContext(base))
+        super.attachBaseContext(LangUtils.attachBaseContext(base)) // 根据当前本地存储的语言更新上下文
     }
 
     override fun onCreate() {
         super.onCreate()
-        SkinActivityLifecycle.register(this)
+        SkinActivityLifecycle.register(this) // 监听全局 activity 生命周期变化
     }
 }

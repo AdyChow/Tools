@@ -40,9 +40,9 @@ object SkinActivityLifecycle : Application.ActivityLifecycleCallbacks {
             val locale = if (locales.isEmpty) Locale.ENGLISH else locales[0]
             val local: String = SpUtil.getString(LangUtils.CURRENT_LANG, "")
             val needUpdateSkin = local != locale.language
-            if (needUpdateSkin) {
+            if (needUpdateSkin) { // 判断是否需要更新语言
                 LangUtils.updateLocale(activity, local)
-                activity.applySkin()
+                activity.applySkin() // 更新语言
             }
         }
     }
@@ -61,6 +61,7 @@ object SkinActivityLifecycle : Application.ActivityLifecycleCallbacks {
 
     private fun installLayoutFactory(activity: BaseAct) {
         kotlin.runCatching {
+            // LayoutInflaterCompat.setFactory2 可以在视图加载过程中拦截并自定义视图的创建行为
             LayoutInflaterCompat.setFactory2(LayoutInflater.from(activity), object :
                 LayoutInflater.Factory2 {
                 override fun onCreateView(
