@@ -3,6 +3,7 @@ package com.ady.tools.widget
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
+import com.ady.tools.App
 import com.ady.tools.R
 import com.ady.tools.kit.LangUtils
 import com.ady.tools.skin.SkinChangeable
@@ -23,6 +24,14 @@ class ATextView(context: Context, attrs: AttributeSet?) : AppCompatTextView(cont
     override fun apply() {
         if (mResTextId != 0) {
             text = LangUtils.getString(mResTextId)
+        }
+
+        if (App.isAr) {
+            layoutDirection = LAYOUT_DIRECTION_RTL
+            textDirection = TEXT_DIRECTION_RTL
+        } else {
+            layoutDirection = LAYOUT_DIRECTION_LTR
+            textDirection = TEXT_DIRECTION_LTR
         }
     }
 

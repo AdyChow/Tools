@@ -27,7 +27,7 @@ class MainAct : BaseAct() {
         binding.colorTxt.text = "彩色渐变字"
         binding.scanCode.text = "扫描二维码"
         binding.preview.text = "查看大图过渡动效"
-        binding.multiLang.text = "多语言切换"
+        binding.multiLang.text = "多语言切换（含阿语镜像）"
     }
 
     private fun initEvents() {

@@ -18,7 +18,7 @@ import java.util.UUID
 
 class CoverAct: AppCompatActivity() {
     private lateinit var binding: ActCoverBinding
-    private var coverName: String? = "多语言切换"
+    private var coverName: String? = "阿语镜像"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

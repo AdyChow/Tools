@@ -9,6 +9,7 @@ class App : Application() {
 
     companion object {
         lateinit var context: Context
+        var isAr: Boolean = false
     }
 
     override fun attachBaseContext(base: Context) {

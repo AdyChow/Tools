@@ -11,7 +11,7 @@ object LangUtils {
 
     const val CURRENT_LANG = "current_lang"
 
-    private val supportLanguage = arrayListOf("zh", "en")
+    private val supportLanguage = arrayListOf("zh", "en", "ar")
 
     /** 根据当前语言获取对应的字符串内容 */
     fun getString(@StringRes defResId: Int): String? {
@@ -48,6 +48,7 @@ object LangUtils {
     }
 
     fun updateLocale(context: Context, newLanguage: String): Configuration {
+        App.isAr = newLanguage == "ar"
         val resources = context.resources
         val configuration = resources.configuration
         val locale: Locale = getLanguageLocale(newLanguage)

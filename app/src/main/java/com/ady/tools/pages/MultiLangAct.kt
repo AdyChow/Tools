@@ -20,6 +20,10 @@ class MultiLangAct : AppCompatActivity() {
         binding.zh.setOnClickListener {
             switchLang("zh")
         }
+
+        binding.ar.setOnClickListener {
+            switchLang("ar")
+        }
     }
 
     private fun switchLang(language: String) {

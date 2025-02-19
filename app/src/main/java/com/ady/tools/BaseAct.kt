@@ -1,5 +1,6 @@
 package com.ady.tools
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.ady.tools.skin.SkinChangeable
 import java.lang.ref.WeakReference
@@ -15,6 +16,12 @@ open class BaseAct : AppCompatActivity() {
     }
 
     fun applySkin() {
+        if (App.isAr) {
+            window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+        } else {
+            window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
+        }
+
         skins.forEach {
             it.get()?.apply()
         }
