@@ -18,7 +18,7 @@ import java.util.UUID
 
 class CoverAct: AppCompatActivity() {
     private lateinit var binding: ActCoverBinding
-    private var coverName: String? = "阿语镜像"
+    private var coverName: String? = "监听键盘开启和关闭"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

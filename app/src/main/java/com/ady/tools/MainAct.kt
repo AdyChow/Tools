@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.ady.tools.databinding.ActMainBinding
 import com.ady.tools.pages.ColorTxtAct
 import com.ady.tools.pages.CoverAct
+import com.ady.tools.pages.KeyboardAct
 import com.ady.tools.pages.MultiLangAct
 import com.ady.tools.pages.ScanCodeAct
 import com.ady.tools.pages.SmallPicAct
@@ -28,6 +29,7 @@ class MainAct : BaseAct() {
         binding.scanCode.text = "扫描二维码"
         binding.preview.text = "查看大图过渡动效"
         binding.multiLang.text = "多语言切换（含阿语镜像）"
+        binding.keyboardListener.text = "监听键盘开启和关闭"
     }
 
     private fun initEvents() {
@@ -45,6 +47,9 @@ class MainAct : BaseAct() {
         }
         binding.multiLang.setOnClickListener {
             startActivity(Intent(this, MultiLangAct::class.java))
+        }
+        binding.keyboardListener.setOnClickListener {
+            startActivity(Intent(this, KeyboardAct::class.java))
         }
     }
 }

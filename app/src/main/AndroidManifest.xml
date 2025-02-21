@@ -42,6 +42,7 @@
         <activity android:name=".pages.SmallPicAct" />
         <activity android:name=".pages.BigPicAct" />
         <activity android:name=".pages.MultiLangAct" />
+        <activity android:name=".pages.KeyboardAct" />
     </application>
 
 </manifest>
