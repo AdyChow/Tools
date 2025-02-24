@@ -12,13 +12,14 @@ import com.ady.tools.kit.SoftKeyBoardListener
 class KeyboardAct : AppCompatActivity() {
 
     private var binding: ActKeyboardBinding? = null
+    private var softKeyBoardListener: SoftKeyBoardListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActKeyboardBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        SoftKeyBoardListener.setListener(
-            this,
+        softKeyBoardListener = SoftKeyBoardListener(this)
+        softKeyBoardListener?.setListener(
             object : SoftKeyBoardListener.OnSoftKeyBoardChangeListener {
                 override fun onKeyboardShow(height: Int) {
                     Toast.makeText(this@KeyboardAct, "键盘打开了", Toast.LENGTH_SHORT).show()
@@ -44,12 +45,17 @@ class KeyboardAct : AppCompatActivity() {
     fun EditText.showKeyboard() {
         requestFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+        imm.showSoftInput(this, 0)
     }
 
     fun EditText.hideKeyboard() {
         clearFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        softKeyBoardListener?.removeListener()
     }
 }

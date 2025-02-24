@@ -3,30 +3,32 @@ package com.ady.tools.kit
 import android.app.Activity
 import android.graphics.Rect
 import android.view.View
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 
 class SoftKeyBoardListener(activity: Activity) {
-    private val rootView: View
+    private var rootView: View? = null
     private var rootViewVisibleHeight = 0
     private var onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener? = null
+    private var onGlobalLayoutListener: OnGlobalLayoutListener? = null
 
     init {
         rootView = activity.window.decorView
 
         // 监听视图树中全局布局发生改变或者视图树中的某个视图的可视状态发生改变
-        rootView.viewTreeObserver.addOnGlobalLayoutListener {
+        onGlobalLayoutListener = OnGlobalLayoutListener {
 
             // 获取当前根视图在屏幕上显示的大小
             val r = Rect()
-            rootView.getWindowVisibleDisplayFrame(r)
+            rootView!!.getWindowVisibleDisplayFrame(r)
             val visibleHeight = r.height()
             if (rootViewVisibleHeight == 0) {
                 rootViewVisibleHeight = visibleHeight
-                return@addOnGlobalLayoutListener
+                return@OnGlobalLayoutListener
             }
 
             // 根视图显示高度没有变化，可以看作软键盘显示／隐藏状态没有改变
             if (rootViewVisibleHeight == visibleHeight) {
-                return@addOnGlobalLayoutListener
+                return@OnGlobalLayoutListener
             }
 
             // 根视图显示高度变小超过 300，可以看作软键盘显示了
@@ -37,7 +39,7 @@ class SoftKeyBoardListener(activity: Activity) {
                     )
                 }
                 rootViewVisibleHeight = visibleHeight
-                return@addOnGlobalLayoutListener
+                return@OnGlobalLayoutListener
             }
 
             // 根视图显示高度变大超过 300，可以看作软键盘隐藏了
@@ -48,13 +50,10 @@ class SoftKeyBoardListener(activity: Activity) {
                     )
                 }
                 rootViewVisibleHeight = visibleHeight
-                return@addOnGlobalLayoutListener
+                return@OnGlobalLayoutListener
             }
         }
-    }
-
-    private fun setOnSoftKeyBoardChangeListener(onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener) {
-        this.onSoftKeyBoardChangeListener = onSoftKeyBoardChangeListener
+        rootView!!.viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
     }
 
     interface OnSoftKeyBoardChangeListener {
@@ -62,12 +61,15 @@ class SoftKeyBoardListener(activity: Activity) {
         fun onKeyboardHide(height: Int)
     }
 
-    companion object {
-        fun setListener(
-            activity: Activity, onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener
-        ) {
-            val softKeyBoardListener = SoftKeyBoardListener(activity)
-            softKeyBoardListener.setOnSoftKeyBoardChangeListener(onSoftKeyBoardChangeListener)
+    fun setListener(onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener) {
+        this.onSoftKeyBoardChangeListener = onSoftKeyBoardChangeListener
+    }
+
+    fun removeListener() {
+        if (onGlobalLayoutListener != null) {
+            rootView?.viewTreeObserver?.removeOnGlobalLayoutListener(onGlobalLayoutListener)
+            this.onGlobalLayoutListener = null
+            this.onSoftKeyBoardChangeListener = null
         }
     }
 }
